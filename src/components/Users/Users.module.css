@@ -1,0 +1,27 @@
+.users {
+    padding: 0 20px;
+}
+
+.pages {
+    padding: 10px 15px;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0 5px;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    color: #5181b8;
+    border: 1px solid #5181b8;
+    background: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover, .btn.active {
+    background: #5181b8;
+    color: #fff;
+}
