@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.app-wrapper { 
+    display: grid;
+
+    grid-template-areas:
+    "header header header"
+    "nav content content";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 10px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    grid-area: header;
+}
+
+.nav {
+    grid-area: nav;
+    height: fit-content;
+}
+
+.app-wrapper-content {
+    grid-area: content;
+    border-radius: 4px;
+    border: 1px solid #4a76a8;
+}
+

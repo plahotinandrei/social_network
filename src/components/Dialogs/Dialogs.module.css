@@ -1,0 +1,37 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 15px;
+}
+
+.dialogsItems {
+    padding: 0 20px;
+    border-right: 1px solid #4a76a8;
+}
+
+.messages {
+    padding: 0 20px;  
+}
+
+.formMessage textarea {
+    width: 100%;
+    height: 90px;
+    margin-bottom: 10px;
+    resize: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.formMessage input[type="button"] {
+    display: block;
+    margin-left: auto;
+    border: none;
+    outline: none;
+    padding: 5px 0;
+    width: 180px;
+    font-size: 20px;
+    color: #fff;
+    background: #5181b8;
+    border-radius: 4px;
+    cursor: pointer;
+}

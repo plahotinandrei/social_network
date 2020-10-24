@@ -1,0 +1,30 @@
+.addPost textarea {
+    width: 100%;
+    height: 90px;
+    margin-bottom: 10px;
+    resize: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.addPost input[type="button"] {
+    display: block;
+    margin-left: auto;
+    border: none;
+    outline: none;
+    padding: 5px 0;
+    width: 180px;
+    font-size: 20px;
+    color: #fff;
+    background: #5181b8;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.addPost input[type="button"]:hover {
+    opacity: .8;
+}
+
+.contentWrapper {
+    padding: 0 15px 15px;
+}
