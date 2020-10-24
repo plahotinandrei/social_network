@@ -1,33 +1,23 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from './UserItem.module.css';
-import * as axios from 'axios';
+import {followAPI} from '../../../api/api.js';
 
 let UserItem = (props) => {
     let follow = () => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.userId}`, {}, {
-            withCredentials: true, 
-            headers: {
-                "API-KEY": "5221ecaf-9b97-4c2e-a882-24127c03c06f"
-            }
-        }).then((response) => {
-            if(response.data.resultCode === 0) {
+        followAPI.follow(props.userId).then((response) => {
+            if(response.resultCode === 0) {
                 props.follow(props.userId);
             };
-        });
+        })
     }
 
     let unfollow = () => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.userId}`, {
-            withCredentials: true, 
-            headers: {
-                "API-KEY": "5221ecaf-9b97-4c2e-a882-24127c03c06f"
-            }
-        }).then((response) => {
-            if(response.data.resultCode === 0) {
+        followAPI.unfollow(props.userId).then((response) => {
+            if(response.resultCode === 0) {
                 props.unfollow(props.userId);
             };
-        });
+        })
     }
 
     return (
