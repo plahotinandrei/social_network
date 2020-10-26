@@ -51,3 +51,7 @@
 .btn:hover {
     opacity: .8;
 }
+
+.btn:disabled {
+    background: #a3b5c5;
+}

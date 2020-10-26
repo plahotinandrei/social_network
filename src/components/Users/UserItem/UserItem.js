@@ -5,17 +5,23 @@ import {followAPI} from '../../../api/api.js';
 
 let UserItem = (props) => {
     let follow = () => {
+        console.log(props.followingInProgress);
+        props.toggleFollowingProgress(true, props.userId);
         followAPI.follow(props.userId).then((response) => {
             if(response.resultCode === 0) {
                 props.follow(props.userId);
+                props.toggleFollowingProgress(false, props.userId);
             };
         })
     }
 
     let unfollow = () => {
+        console.log(props.followingInProgress);
+        props.toggleFollowingProgress(true, props.userId);
         followAPI.unfollow(props.userId).then((response) => {
             if(response.resultCode === 0) {
                 props.unfollow(props.userId);
+                props.toggleFollowingProgress(false, props.userId);
             };
         })
     }
@@ -33,8 +39,8 @@ let UserItem = (props) => {
                 <p className={styles.status}>{props.status}</p>
             </div>
             {props.followed ? 
-                <button className={styles.btn} onClick={unfollow}>unfollow</button> : 
-                <button className={styles.btn} onClick={follow}>follow</button>
+                <button className={styles.btn} onClick={unfollow} disabled={props.followingInProgress.some((id) => id == props.userId)}>unfollow</button> : 
+                <button className={styles.btn} onClick={follow} disabled={props.followingInProgress.some((id) => id == props.userId)}>follow</button>
             }
         </div>
     )

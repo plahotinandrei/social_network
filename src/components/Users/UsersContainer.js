@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users.js'
 import {connect} from 'react-redux';
-import {followCreator, unfollowCreator, setUsersCreator, setPageCreator, setTotalCountCreator, toggleFetchingCreator} from './../../redux/users-reduser.js';
+import {followCreator, unfollowCreator, setUsersCreator, setPageCreator, setTotalCountCreator, toggleFetchingCreator, toggleFollowingProgressCreator} from './../../redux/users-reduser.js';
 import {usersAPI} from '../../api/api.js';
 
 class UsersContainer extends React.Component {
@@ -34,6 +34,8 @@ class UsersContainer extends React.Component {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 isFetching={this.props.isFetching}
+                followingInProgress={this.props.followingInProgress}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         )
     }
@@ -45,7 +47,8 @@ let mapStateToProps = (state) => {
         pageCount: state.usersPage.pageCount,
         totalCount: state.usersPage.totalCount,
         usersCount: state.usersPage.usersCount,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -56,6 +59,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         unfollow: (userId) => {
             dispatch(unfollowCreator(userId))
+        },
+        toggleFollowingProgress: (isFetching, userId) => {
+            dispatch(toggleFollowingProgressCreator(isFetching, userId))
         },
         setUsers: (users) => {
             dispatch(setUsersCreator(users))
