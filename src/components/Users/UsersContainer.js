@@ -1,26 +1,15 @@
 import React from 'react';
 import Users from './Users.js'
 import {connect} from 'react-redux';
-import {followCreator, unfollowCreator, setUsersCreator, setPageCreator, setTotalCountCreator, toggleFetchingCreator, toggleFollowingProgressCreator} from './../../redux/users-reduser.js';
-import {usersAPI} from '../../api/api.js';
+import {getUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from './../../redux/users-reduser.js';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleFetching(true);
-        usersAPI.getUsers(this.props.pageCount, this.props.usersCount).then((response) => {
-            this.props.setUsers(response.items);
-            this.props.setTotalCount(response.totalCount);
-            this.props.toggleFetching(false);
-        });
+        this.props.getUsers(this.props.pageCount, this.props.usersCount);
     }
 
     onChangedPage = (pageNumber) => {
-        this.props.setPages(pageNumber);
-        this.props.toggleFetching(true);
-        usersAPI.getUsers(pageNumber, this.props.usersCount).then((response) => {
-            this.props.setUsers(response.items);
-            this.props.toggleFetching(false);
-        });
+        this.props.getUsers(pageNumber, this.props.usersCount);
     }
 
     render() {
@@ -54,26 +43,14 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
+        getUsers: (pageCount, usersCount) => {
+            dispatch(getUsersThunkCreator(pageCount, usersCount))
+        },
         follow: (userId) => {
-            dispatch(followCreator(userId))
+            dispatch(followThunkCreator(userId))
         },
         unfollow: (userId) => {
-            dispatch(unfollowCreator(userId))
-        },
-        toggleFollowingProgress: (isFetching, userId) => {
-            dispatch(toggleFollowingProgressCreator(isFetching, userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersCreator(users))
-        },
-        setPages: (users, pageCount) => {
-            dispatch(setPageCreator(users, pageCount))
-        },
-        setTotalCount: (totalCount) => {
-            dispatch(setTotalCountCreator(totalCount))
-        },
-        toggleFetching: (isFetching) => {
-            dispatch(toggleFetchingCreator(isFetching));
+            dispatch(unfollowThunkCreator(userId))
         }
     }
 }

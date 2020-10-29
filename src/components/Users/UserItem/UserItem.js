@@ -1,29 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from './UserItem.module.css';
-import {followAPI} from '../../../api/api.js';
 
 let UserItem = (props) => {
     let follow = () => {
-        console.log(props.followingInProgress);
-        props.toggleFollowingProgress(true, props.userId);
-        followAPI.follow(props.userId).then((response) => {
-            if(response.resultCode === 0) {
-                props.follow(props.userId);
-                props.toggleFollowingProgress(false, props.userId);
-            };
-        })
+        props.follow(props.userId);
     }
 
     let unfollow = () => {
-        console.log(props.followingInProgress);
-        props.toggleFollowingProgress(true, props.userId);
-        followAPI.unfollow(props.userId).then((response) => {
-            if(response.resultCode === 0) {
-                props.unfollow(props.userId);
-                props.toggleFollowingProgress(false, props.userId);
-            };
-        })
+        props.unfollow(props.userId);
     }
 
     return (

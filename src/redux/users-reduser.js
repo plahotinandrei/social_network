@@ -1,3 +1,5 @@
+import {usersAPI, followAPI} from '../api/api.js';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -137,5 +139,41 @@ let toggleFollowingProgressCreator = (isFetching, userId) => {
     }
 }
 
+let getUsersThunkCreator = (pageCount, usersCount) => {
+    return (dispatch) => {
+        dispatch(toggleFetchingCreator(true));
+        dispatch(setPageCreator(pageCount));
+        usersAPI.getUsers(pageCount, usersCount).then((response) => {
+            dispatch(setUsersCreator(response.items));
+            dispatch(setTotalCountCreator(response.totalCount));
+            dispatch(toggleFetchingCreator(false));
+        });
+    }
+}
+
+let followThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressCreator(true, userId));
+        followAPI.follow(userId).then((response) => {
+            if(response.resultCode === 0) {
+                dispatch(followCreator(userId));
+                dispatch(toggleFollowingProgressCreator(false, userId));
+            };
+        })
+    }
+}
+
+let unfollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressCreator(true, userId));
+        followAPI.unfollow(userId).then((response) => {
+            if(response.resultCode === 0) {
+                dispatch(unfollowCreator(userId));
+                dispatch(toggleFollowingProgressCreator(false, userId));
+            };
+        })
+    }
+}
+
 export default usersReduser;
-export {followCreator, unfollowCreator, setUsersCreator, setPageCreator, setTotalCountCreator, toggleFetchingCreator, toggleFollowingProgressCreator};
+export {getUsersThunkCreator, followThunkCreator, unfollowThunkCreator};

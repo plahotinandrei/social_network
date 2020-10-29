@@ -1,3 +1,5 @@
+import {authAPI} from '../api/api.js';
+
 const SET_USER_DATA = 'SET-USER-DATA';
 
 let initialState = {
@@ -25,6 +27,17 @@ let setUserDataCreator = (data) => {
     }
 }
 
+let authUserThunkCreator = () => {
+    return (dispatch) => {
+        authAPI.isAuth().then((response) => {
+            if(response.resultCode === 0){
+                dispatch(setUserDataCreator(response.data));
+            };
+            console.log(response)
+        })
+    }
+}
+
 export default authReducer;
-export {setUserDataCreator};
+export {setUserDataCreator, authUserThunkCreator};
 
