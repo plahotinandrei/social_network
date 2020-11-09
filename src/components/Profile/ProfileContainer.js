@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
 import Profile from './Profile.js';
 import {getUserThunkCreator} from './../../redux/profile-reducer.js';
 import withAuthRedirect from '../../hoc/withAuthRedirect.js';
@@ -37,6 +38,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let WithUrlDataContainer = withRouter(withAuthRedirect(ProfileContainer));
-
-export default connect(mapStateToProps, mapDispatchToProps)(WithUrlDataContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);

@@ -1,4 +1,5 @@
 import React from 'react';
+import {compose} from 'redux';
 import Users from './Users.js'
 import {connect} from 'react-redux';
 import {getUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from './../../redux/users-reduser.js';
@@ -56,4 +57,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersContainer));
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(UsersContainer);
