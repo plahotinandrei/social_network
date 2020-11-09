@@ -3,6 +3,7 @@ import {authAPI} from '../api/api.js';
 const SET_USER_DATA = 'SET-USER-DATA';
 
 let initialState = {
+    isAuth: false,
     id: null,
     login: null,
     email: null
@@ -13,7 +14,8 @@ let authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         default:
             return state;

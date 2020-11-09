@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar.js';
 import ProfileContainer from './components/Profile/ProfileContainer.js';
 import DialogsContainer from './components/Dialogs/DialogsContainer.js';
 import UsersContainer from './components/Users/UsersContainer.js';
+import Login from './components/Login/Login.js';
 import 'normalize.css';
 import './App.css';
 
@@ -38,7 +39,16 @@ const App = (props) => {
                                 <UsersContainer/>
                             )
                         }}
-                    />             
+                    />  
+                    <Route 
+                        path="/login" 
+                        render={() => {
+                            return (
+                                <Login/>
+                            )
+                        }}
+                        exact
+                    />           
                 </div>  
             </div>
         </BrowserRouter>

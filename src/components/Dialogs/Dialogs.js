@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import Message from './Message/Message.js';
 import DialogItem from './DialogItem/DialogItem.js';
+import withAuthRedirect from '../../hoc/withAuthRedirect.js';
 
 const Dialogs = (props) => {
-    //debugger;
     let updateNewMessage = (e) => {
         props.updateNewMessage(e.target.value);
     }
@@ -49,5 +49,5 @@ const Dialogs = (props) => {
     )
 }
 
-export default Dialogs;
+export default withAuthRedirect(Dialogs);
 

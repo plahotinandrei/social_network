@@ -2,6 +2,7 @@ import React from 'react';
 import Users from './Users.js'
 import {connect} from 'react-redux';
 import {getUsersThunkCreator, followThunkCreator, unfollowThunkCreator} from './../../redux/users-reduser.js';
+import withAuthRedirect from '../../hoc/withAuthRedirect.js';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -55,4 +56,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersContainer));
